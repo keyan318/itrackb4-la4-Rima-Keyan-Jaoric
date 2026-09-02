@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies</title>
+    <title>Filtered Movies</title>
 
     <style>
         body {
@@ -14,7 +14,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: auto;
             background: white;
             padding: 30px;
@@ -24,15 +24,19 @@
 
         h1 {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             color: #222;
+        }
+
+        .filter-info {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            overflow: hidden;
-            border-radius: 8px;
         }
 
         th {
@@ -56,8 +60,21 @@
             background: #f7f7f7;
         }
 
-        .rating {
+        a {
+            color: #222;
             font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #888;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -66,7 +83,15 @@
 
     <div class="container">
 
-        <h1>🎬 Movie List</h1>
+        <h1>🎬 Movies</h1>
+
+        <div class="filter-info">
+            @if($value)
+                Showing genre: <strong>{{ $value }}</strong>
+            @else
+                Showing all movies
+            @endif
+        </div>
 
         <table>
             <thead>
@@ -74,25 +99,25 @@
                     <th>Title</th>
                     <th>Genre</th>
                     <th>Year</th>
-                    <th>Director</th>
-                    <th>Rating</th>
-                    <th>Duration</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach ($items as $movie)
+                @foreach($items as $item)
                     <tr>
-                        <td><strong>{{ $movie['title'] }}</strong></td>
-                        <td>{{ $movie['genre'] }}</td>
-                        <td>{{ $movie['year'] }}</td>
-                        <td>{{ $movie['director'] }}</td>
-                        <td class="rating">{{ $movie['rating'] }}</td>
-                        <td>{{ $movie['duration'] }}</td>
+                        <td>
+                            <a href="{{ route('movies.show', $item['id']) }}">
+                                {{ $item['title'] }}
+                            </a>
+                        </td>
+                        <td>{{ $item['genre'] }}</td>
+                        <td>{{ $item['year'] }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+
+        
 
     </div>
 
