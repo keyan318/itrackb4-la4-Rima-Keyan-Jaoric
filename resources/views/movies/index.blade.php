@@ -1,101 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies</title>
+@extends('layouts.app')
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            padding: 40px;
-        }
+@section('title', 'Movie List')
 
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
+@section('content')
 
-        h1 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #222;
-        }
+<h2>Movie List</h2>
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            overflow: hidden;
-            border-radius: 8px;
-        }
+<table class="table-table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Year</th>
+            <th>Director</th>
+            <th>Rating</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
 
-        th {
-            background: #222;
-            color: white;
-            padding: 14px;
-            text-align: left;
-        }
+    <tbody>
+        @forelse($items as $movie)
+        <tr>
+            <td>{{$loop iteration}}</td>
+            <td><strong>{{$movie['title']}}</strong></td>
+            <td>{{$movie['genre']}}</td>
+            <td>{{$movie['year']}}</td>
+            <td>{{$movie['director']}}</td>
+            <td class="rating">
+                {{$movie['rating']}}
+                @if ($movie['rating'] >=9)
+                     <span class="badge bg-success">Top rated</span>
+                @endif    
+            </td>
+            <td>{{$movie['duration']}}</td>
+        </tr>
+        @empty
+        <tr>
+            <td colspan="7">No mmovies found yet. Add some to see them here.</td>
+        </tr>
+        @endforlese
+    </tbody>
+</table>
 
-        td {
-            padding: 13px 14px;
-            border-bottom: 1px solid #ddd;
-            color: #444;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover {
-            background: #f7f7f7;
-        }
-
-        .rating {
-            font-weight: bold;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="container">
-
-        <h1>🎬 Movie List</h1>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Genre</th>
-                    <th>Year</th>
-                    <th>Director</th>
-                    <th>Rating</th>
-                    <th>Duration</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($items as $movie)
-                    <tr>
-                        <td><strong>{{ $movie['title'] }}</strong></td>
-                        <td>{{ $movie['genre'] }}</td>
-                        <td>{{ $movie['year'] }}</td>
-                        <td>{{ $movie['director'] }}</td>
-                        <td class="rating">{{ $movie['rating'] }}</td>
-                        <td>{{ $movie['duration'] }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-    </div>
-
-</body>
-</html>
-
+@endsection
