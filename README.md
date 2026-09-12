@@ -16,3 +16,4 @@ I used route names like `route('movies.show', $item['id'])` instead of directly 
 
 For example, if I change `/movies` to `/films`, the links using `route()` can follow the new route. But if I used the hard-coded URLs, I would have to change the links manually in my Blade files.
 # itrackb4-la3-Rima-Keyan-Jaoric
+# itrackb4-la4-Rima-Keyan-Jaoric

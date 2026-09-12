@@ -1,18 +1,25 @@
-@extends('layours.app')
+@extends('layouts.app')
 
 @section('title', $item['title'])
 
 @section('content')
 
-<div class=card"">
-    <div class="card-body">
-        <h2>{{$item['title']}}</h2>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ $item['title'] }}</h2>
 
-        <p><strong>Genre:</strong>{{$item['genre']}}</p>
-        <p><strong>Year:</strong>{{$item['year']}}</p>
-        <p><strong>Director:</strong>{{$item['director']}}</p>
-        <p><strong>Rating:</strong>{{$item['rating']}}</p>
-        <p><strong>Duration</strong>{{$item['duration']}}</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Genre:</strong> {{ $item['genre'] }}</li>
+                <li class="list-group-item"><strong>Year:</strong> {{ $item['year'] }}</li>
+                <li class="list-group-item"><strong>Director:</strong> {{ $item['director'] }}</li>
+                <li class="list-group-item"><strong>Rating:</strong> {{ $item['rating'] }}</li>
+                <li class="list-group-item"><strong>Duration:</strong> {{ $item['duration'] }}</li>
+            </ul>
+
+            <a href="{{ route('movies.index') }}" class="btn btn-primary mt-3">
+                ← Back to List
+            </a>
+        </div>
     </div>
-    <a  class="btn btn-primary"  href="{{route('movies.index')}}"></a>
-</div>
+
+@endsection
